@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Mr. McPennock</title>
+        <link rel="icon" type="image/png" href="files/probably the favicon idk.png">
+        <style>
+            html, body {
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                margin: 0;
+                padding: 0;
+                height: 100%;
+                background-color: rgb(7, 7, 31);
+                color: white;
+            }
+            footer {
+                text-align: center;
+            }
+            #top {
+                background-image: url(files/banner\ one\ part\ 2.jpg);
+                width: 100%;
+                height: 50%;
+                color: #101b8f;
+                display: flex;
+                justify-content: center;
+                align-items: center; height: 100vh;
+            }
+            button {
+                border: rgb(7, 7, 31);
+                border-radius: 10px;
+            }
+            button:hover {
+                transform: scale(1.2);
+            }
+            h1 {
+                font-size: 500%;
+            }
+            #link {
+                text-align: center;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="top">
+            <h1><b>Mr. McPennock</b></h1>
+        </div>
+            <div id="link">
+            <button style="background-color: red;" onclick="window.location.href='https://www.youtube.com/@Mr.McPennock'"><img src="files/icons/yt.png" alt="yt"></button>
+            <button style="background-color: #6441a5" onclick="window.location.href='https://www.twitch.tv/mrmcpennock'"><img src="files/icons/twi.png" alt="twi"></button>
+            <button style="background-color: #738adb" onclick="window.location.href='https://www.discord.gg/kCT8u6kQQ3'"><img src="files/icons/dis.png" alt="dis"></button>
+            <button style="background-color: #1778F2;" onclick="window.location.href='https://www.facebook.com/profile.php?id=61574416243017'"><img src="files/icons/fb.png" alt="fb"></button>
+            <button style="background-color: #000000;" onclick="window.location.href='https://www.x.com/MrMcPennock'"><img src="files/icons/x.png" alt="x"></button>
+            <button style="background-color: #78F0CA;" onclick="window.location.href='https://www.streamlabs.com/sl_id_28f063ff-e483-3fe3-982d-e56dce76f1fa'"><img src="files/icons/don.png" alt="don"></button>
+            <button style="background-color: #53FC18;" onclick="window.location.href='https://www.kick.com/mrmcpennock'"><img src="files/icons/kik.png" alt="kik"></button>
+            <button style="background-color: #6b0f8e;" onclick="window.location.href='mailto://mrmcpennock@gmail.com'"><img src="files/icons/mail.png" alt="mail"></button>
+            <br>
+            <h2>Stream schedule</h2>
+            <img src="files/scedule.png">
+            <br>
+            <h2>Is there a stream going on right now?</h2>
+            <h3 id="result"></h3>
+        </div>
+        <br>
+        <footer style="background-color: rgb(2, 2, 31);">
+            anything that uses the time use calculations, not updates from third party sources
+            <br>
+            Bro, I don't know that to put in a footer
+            <img src="files/credit.png">
+        </footer>
+    </body>
+    <script>
+        function checkESTTime() {
+  // Get current time in EST (UTC-5 or UTC-4 depending on daylight saving)
+  const now = new Date();
+  const estTime = new Date(now.toLocaleString("en-US", { timeZone: "America/New_York" }));
+
+  const hour = estTime.getHours();  // 0–23
+  const day = estTime.getDay();     // 0=Sunday, 1=Monday, ..., 6=Saturday
+
+  const isBetween9and12 = (hour >= 21 || hour < 0); // 9PM (21) to 12AM (0)
+  const isExcludedDay = (day === 0 || day === 3);   // Sunday or Wednesday
+
+  const result = document.getElementById("result");
+
+  if (isBetween9and12 && !isExcludedDay) {
+    result.textContent = "Mabye, just check";
+    result.className = "yes";
+
+  } else {
+    if (!isExcludedDay) {
+        result.textContent = "no but it might start later";
+        result.className = "no";
+    }
+    else {
+        result.textContent = "no";
+        result.className = "no";
+    }
+
+  }
+}
+
+// Run immediately and every minute
+checkESTTime();
+setInterval(checkESTTime, 60000);
+    </script>
+</html>
